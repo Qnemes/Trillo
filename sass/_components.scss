@@ -107,6 +107,7 @@
 	@media only screen and (max-width: $bp-medium) {
 		display: flex;
 		margin: 0;
+		text-align: center;
 	}
 	&__item {
 		position: relative;
@@ -186,9 +187,71 @@
 // Gallery
 .gallery {
 	display: flex;
+	&__item {
+		position: relative;
+		overflow: hidden;
+		&--push {
+			.gallery__photo {
+				-moz-transform: translate3d(0, 0, 0);
+				-webkit-transform: translate3d(0, 0, 0);
+				transform: translate3d(0, 0, 0);
+				-moz-transition: all .5s;
+				-webkit-transition: all .5s;
+				transition: all .5s;
+			}
+			.gallery__caption {
+				top: 100%;
+				opacity: 1;
+				-moz-transform: translate3d(0, 0, 0);
+				-webkit-transform: translate3d(0, 0, 0);
+				transform: translate3d(0, 0, 0);
+			}
+			&:hover .gallery__photo {
+				-moz-transform: translate3d(0, -20px, 0);
+				-webkit-transform: translate3d(0, -20px, 0);
+				transform: translate3d(0, -20px, 0);
+				opacity: .7;
+			}
+			&:hover .gallery__caption {
+				-moz-transform: translate3d(0, -100%, 0); /* move caption up vertically to fully reveal caption */
+				-webkit-transform: translate3d(0, -100%, 0);
+				transform: translate3d(0, -100%, 0);
+				-moz-transition: all 0.5s;
+				-webkit-transition: all 0.5s;
+				transition: all 0.5s;
+				box-shadow: 0px -2px 28px rgba(0, 0, 0, 0.3);
+			}
+		}
+	}
 	&__photo {
 		display: block;
 		width: 100%;
+	}
+	&__caption {
+		position: absolute;
+		z-index: 400;
+		padding: 1.5rem;
+		width: 100%;
+		max-height: 100%;
+		top: 50%;
+		left: 0;
+		background-image: linear-gradient(to left, var(--color-primary), var(--color-primary-dark));
+		color: #fff;	
+		font-size: 1.5rem;	
+		text-align: center;	
+		text-transform: uppercase;		
+		opacity: 0;
+		overflow: hidden;	
+		-moz-transform: translate3d(-100%, -50%, 0);
+		-webkit-transform: translate3d(-100%, -50%, 0);
+		transform: translate3d(-100%, -50%, 0);
+		-moz-transition: all .5s;
+		-webkit-transition: all .5s;
+		transition: all .5s;
+		@media only screen and (max-width: $bp-small) {
+			font-size: 1.2rem;
+			padding: 1rem;
+		}
 	}
 }
 // Hotel overview
@@ -257,6 +320,9 @@
 			font-size: .5rem;
 			text-align: center;
 		}
+		@media only screen and (max-width: $bp-smallest) {
+			margin-top: .5rem;
+		}
 	}
 }
 // Hotel overview button
@@ -324,11 +390,9 @@
 			height: 1rem;
 			width: 1rem;
 			margin-right: .7rem;
-
-			//	Older browsers approach
+			// Older browsers approach
 			background-image: url(../img/chevron-thin-right.svg);
 			background-size: cover;
-
 			// Newer browsers approach - masks
 			@supports (-webkit-mask-image: url()) or (mask-image: url()) {
 				background-color: var(--color-primary);
@@ -336,7 +400,7 @@
 				-webkit-mask-size: cover;
 				mask-image: url(../img/chevron-thin-right.svg);
 				mask-size: cover;
-				background-image: none;	// fixing older browsers bg-img applies here
+				background-image: none; // fixing older browsers bg-img applies here
 			}
 		}
 	}
@@ -347,9 +411,11 @@
 	color: var(--color-grey-dark-3);
 	display: flex;
 	align-items: center;
-
 	&__count {
 		margin-right: auto;
+		@media only screen and (max-width: $bp-smallest) {
+			margin-right: 1.25rem;
+		}
 	}
 	&__friends {
 		display: flex;
@@ -429,11 +495,9 @@
 .cta {
 	padding: 3.5rem 0;
 	text-align: center;
-
 	@media only screen and (max-width: $bp-medium) {
 		padding: 2.5rem 0;
 	}
-
 	&__book-now {
 		font-size: 2rem;
 		font-weight: 300;
